@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Проект — ЗА РАМКИ</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <b><a href="./">ЗА РАМКИ</a></b>
+        <small>portfolio</small>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <a class="btn ghost" href="./#contact">Консультация</a>
+        <a class="btn primary" href="./#contact">Заказать проект</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+
+      <div class="project-hero">
+        <div class="breadcrumb"><a href="./#portfolio">← Назад к портфолио</a></div>
+        <h1 class="project-title" id="ptitle">Проект</h1>
+        <div class="meta" id="pmeta"></div>
+        <div class="brass-line"></div>
+        <p class="project-summary" id="psummary"></p>
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+
+      <div class="section" style="padding: 54px 0 0;">
+        <div class="panel">
+          <h2 class="section-title" style="margin-top:0;">Заказать проект</h2>
+          <p class="section-sub">Форма будет подключена на следующем шаге. Пока — якорь и CTA.</p>
+          <a class="btn primary" href="./#contact" onclick="location.href='./#contact'; return false;">Оставить заявку</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <span>© <span id="y"></span> ЗА РАМКИ</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  $("#y").textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(location.search);
+  const id = (params.get("id") || "").trim();
+
+  const esc = (v) => (v ?? "").toString()
+    .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+  function showNotFound(){
+    $("#ptitle").textContent = "Проект не найден";
+    $("#psummary").textContent = "Проверь ссылку или вернись в портфолио.";
+    $("#gallery").innerHTML = "";
+  }
+
+  fetch("./data/projects.json", { cache: "no-store" })
+    .then(r => r.json())
+    .then(list => {
+      const items = Array.isArray(list) ? list : [];
+      const p = items.find(x => (x.slug || "") === id);
+      if (!p) return showNotFound();
+
+      document.title = (p.title ? p.title + " — " : "") + "ЗА РАМКИ";
+      $("#ptitle").textContent = p.title || "Проект";
+      $("#pmeta").innerHTML = `
+        <span>${esc(p.city || "")}</span>
+        <span>•</span>
+        <span>${esc(p.type || "")}</span>
+        ${p.areaM2 ? `<span>•</span><span>${esc(p.areaM2)} м²</span>` : ""}
+      `;
+      $("#psummary").textContent = p.summary || "";
+
+      const imgs = Array.isArray(p.images) ? p.images : [];
+      $("#gallery").innerHTML = imgs.map(src => `
+        <div class="img">
+          <img src="${esc(src)}" alt="${esc(p.title || "Проект")}" loading="lazy" />
+        </div>
+      `).join("");
+
+      if (!imgs.length){
+        $("#gallery").innerHTML = `<div class="panel">У проекта пока нет изображений. Добавь файлы в assets/portfolio/${esc(p.slug)}/</div>`;
+      }
+    })
+    .catch(showNotFound);
+})();
+</script>
+
+</body>
+</html>

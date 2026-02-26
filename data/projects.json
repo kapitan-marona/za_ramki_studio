@@ -1,0 +1,64 @@
+[
+  {
+    "slug": "black-marble-loft",
+    "title": "Black Marble Loft",
+    "city": "Helsinki",
+    "type": "Квартира",
+    "areaM2": 62,
+    "summary": "Драматичный тёмный интерьер с акцентом на камень, латунь и мягкий свет. Тестовый проект для проверки сетки и тегов.",
+    "tags": ["квартира", "лофт", "черный мрамор", "маленькая площадь", "авторский надзор", "тёмный интерьер"],
+    "cover": "assets/portfolio/black-marble-loft/cover.jpg",
+    "images": [
+      "assets/portfolio/black-marble-loft/01.jpg",
+      "assets/portfolio/black-marble-loft/02.jpg",
+      "assets/portfolio/black-marble-loft/03.jpg",
+      "assets/portfolio/black-marble-loft/04.jpg",
+      "assets/portfolio/black-marble-loft/05.jpg",
+      "assets/portfolio/black-marble-loft/06.jpg",
+      "assets/portfolio/black-marble-loft/07.jpg",
+      "assets/portfolio/black-marble-loft/08.jpg"
+    ]
+  },
+  {
+    "slug": "concrete-minimal-house",
+    "title": "Concrete Minimal House",
+    "city": "Espoo",
+    "type": "Дом",
+    "areaM2": 180,
+    "summary": "Спокойная архитектурная композиция: бетон, большие плоскости, панорамный свет. Тестовый проект для проверки карточек и страницы проекта.",
+    "tags": ["дом", "бетон", "минимализм", "панорамные окна", "современная архитектура", "open space"],
+    "cover": "assets/portfolio/concrete-minimal-house/cover.jpg",
+    "images": [
+      "assets/portfolio/concrete-minimal-house/01.jpg",
+      "assets/portfolio/concrete-minimal-house/02.jpg",
+      "assets/portfolio/concrete-minimal-house/03.jpg",
+      "assets/portfolio/concrete-minimal-house/04.jpg",
+      "assets/portfolio/concrete-minimal-house/05.jpg",
+      "assets/portfolio/concrete-minimal-house/06.jpg",
+      "assets/portfolio/concrete-minimal-house/07.jpg",
+      "assets/portfolio/concrete-minimal-house/08.jpg",
+      "assets/portfolio/concrete-minimal-house/09.jpg",
+      "assets/portfolio/concrete-minimal-house/10.jpg",
+      "assets/portfolio/concrete-minimal-house/11.jpg",
+      "assets/portfolio/concrete-minimal-house/12.jpg"
+    ]
+  },
+  {
+    "slug": "glass-studio-apartment",
+    "title": "Glass Studio Apartment",
+    "city": "Oulu",
+    "type": "Студия",
+    "areaM2": 38,
+    "summary": "Лёгкая планировка и зонирование через стекло и тёплый металл. Тестовый проект для проверки малого формата и тегов.",
+    "tags": ["студия", "маленькая площадь", "зонирование", "стекло", "латунь", "светлый акцент"],
+    "cover": "assets/portfolio/glass-studio-apartment/cover.jpg",
+    "images": [
+      "assets/portfolio/glass-studio-apartment/01.jpg",
+      "assets/portfolio/glass-studio-apartment/02.jpg",
+      "assets/portfolio/glass-studio-apartment/03.jpg",
+      "assets/portfolio/glass-studio-apartment/04.jpg",
+      "assets/portfolio/glass-studio-apartment/05.jpg",
+      "assets/portfolio/glass-studio-apartment/06.jpg"
+    ]
+  }
+]
