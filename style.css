@@ -227,8 +227,53 @@ hr{
   .grid{ grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px){
+  /* header: компактнее */
+  .topbar-inner{
+    padding: 12px var(--pad);
+    gap: 10px;
+  }
+
+  .brand b{ letter-spacing: .10em; }
+  .brand small{ display:none; }
+
   .nav{ display:none; }
+
+  /* кнопки в хедере: компактные */
+  .topbar-inner > div[style]{
+    gap: 8px !important;
+  }
+  .btn{
+    padding: 9px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* hero */
+  .hero{
+    padding: 72px 0 42px;
+  }
+  .hero p{ max-width: 62ch; }
+
+  /* фильтры тегов: горизонтальный скролл */
+  .filters{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .filters::-webkit-scrollbar{ height: 6px; }
+  .tag{
+    flex: 0 0 auto;
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  /* grid */
   .grid{ grid-template-columns: 1fr; }
+
+  /* services always 1-col */
+  #services .grid{
+    grid-template-columns: 1fr !important;
+  }
 }
-
-
