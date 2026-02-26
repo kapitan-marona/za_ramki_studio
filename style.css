@@ -415,3 +415,12 @@ h1,h2,h3,h4,h5,h6,.section-title{
   .grid{ grid-template-columns:1fr; }
   #services .grid{ grid-template-columns:1fr !important; }
 }
+
+/* --- Remove underline from buttons only --- */
+.btn,
+.btn:hover,
+.hero-actions a,
+.hero-actions a:hover{
+  text-decoration: none !important;
+}
+
