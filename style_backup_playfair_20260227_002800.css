@@ -1,85 +1,59 @@
-/* ===========================
-   ZA RAMKI — style.css (refactor)
-   One source of truth: Manrope + Playfair Display SC (hero)
-   =========================== */
-
-/* ---- Fonts (ONLY актуальные) ---- */
 @font-face {
-  font-family: 'Playfair Display SC';
-  src: url('./fonts/PlayfairDisplaySC-Regular.ttf') format('truetype');
+  font-family: 'Bellota';
+  src: url('./fonts/Bellota-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Playfair Display SC';
-  src: url('./fonts/PlayfairDisplaySC-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
+  font-family: 'Bellota';
+  src: url('./fonts/Bellota-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Manrope';
-  src: url('./fonts/Manrope-Regular.ttf') format('truetype');
+  font-family: 'Instrument Sans Condensed';
+  src: url('./fonts/InstrumentSans_Condensed-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Manrope';
-  src: url('./fonts/Manrope-Medium.ttf') format('truetype');
+  font-family: 'Instrument Sans Condensed';
+  src: url('./fonts/InstrumentSans_Condensed-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Manrope';
-  src: url('./fonts/Manrope-SemiBold.ttf') format('truetype');
+  font-family: 'Instrument Sans Condensed';
+  src: url('./fonts/InstrumentSans_Condensed-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
-
-/* ---- Tokens ---- */
 :root{
-  /* colors */
   --bg: #0f1013;
   --panel: #14151a;
   --text: rgba(255,255,255,.90);
   --muted: rgba(255,255,255,.62);
   --border: rgba(255,255,255,.12);
 
-  /* layout */
   --max: 1120px;
   --pad: 20px;
   --gap: 16px;
-
-  /* typography */
-  --font-main: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  --font-hero: 'Playfair Display SC', serif;
-
-  --w-regular: 400;
-  --w-medium: 500;
-  --w-semibold: 600;
-
-  --lh-body: 1.7;
-  --lh-head: 1.25;
 }
 
-/* ---- Base ---- */
 *{ box-sizing: border-box; }
 html, body{ height:100%; }
 body{
   margin:0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-main);
-  line-height: var(--lh-body);
-  letter-spacing: .01em;
-
-  /* header overlay spacing */
-  padding-top: 70px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  line-height: 1.45;
 }
 
 a{ color: inherit; text-decoration: none; }
@@ -97,33 +71,22 @@ hr{
   margin: 28px 0;
 }
 
-/* headings (все, кроме hero) */
-h1,h2,h3,h4,h5,h6,.section-title{
-  font-family: var(--font-main);
-  line-height: var(--lh-head);
-  font-weight: var(--w-semibold);
-  letter-spacing: .005em;
-}
-
-/* ---- Header (overlay + stretched nav) ---- */
 .topbar{
-  position: fixed;
-  top:0; left:0; right:0;
-  z-index: 100;
-  background: rgba(15,16,19,.62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,.10);
+  position: sticky;
+  top:0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
 .topbar-inner{
   max-width: var(--max);
   margin: 0 auto;
-  padding: 16px var(--pad);
+  padding: 14px var(--pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 22px;
+  gap: 14px;
 }
 
 .brand{
@@ -142,27 +105,17 @@ h1,h2,h3,h4,h5,h6,.section-title{
 }
 
 .nav{
-  flex: 1 1 auto;
   display:flex;
-  align-items:center;
-  justify-content: space-evenly;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 .nav a{
   color: var(--muted);
   font-size: 14px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  font-weight: var(--w-medium);
-  letter-spacing: .02em;
-  text-decoration: none;
+  padding: 6px 8px;
 }
-.nav a:hover{
-  color: var(--text);
-  background: rgba(255,255,255,.06);
-  text-decoration: none;
-}
+.nav a:hover{ color: var(--text); }
 
-/* ---- Buttons ---- */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -174,52 +127,39 @@ h1,h2,h3,h4,h5,h6,.section-title{
   cursor: pointer;
   user-select: none;
   font-size: 14px;
-  font-family: var(--font-main);
-  font-weight: var(--w-medium);
 }
 .btn:hover{ background: rgba(255,255,255,.05); }
-.btn.primary{ background: rgba(255,255,255,.08); }
+.btn.primary{
+  background: rgba(255,255,255,.08);
+}
 
-/* ---- Hero ---- */
 .hero{
-  padding: 140px 0 90px;
+  padding: 110px 0 70px;
 }
-.hero h1.hero-title{
-  font-family: var(--font-hero);
-  font-weight: 400;
-  font-style: normal;
-  font-size: clamp(36px, 4.6vw, 64px);
-  line-height: 1.03;
-  letter-spacing: .015em;
-  margin: 0;
-  color: rgba(255,255,255,.86);
+.hero h1{
+  margin: 0 0 10px;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 650;
+  letter-spacing: .01em;
 }
-.hero h1.hero-title em{
-  font-style: italic;
-  color: rgba(255,255,255,.78);
-}
-
 .hero p{
-  margin: 42px 0 0;
-  max-width: 58ch;
+  margin: 0 0 14px;
+  max-width: 70ch;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.8;
 }
 .hero-actions{
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 30px;
 }
 
-/* ---- Sections ---- */
 .section{
   padding: 34px 0;
 }
 .section-title{
   margin: 0 0 8px;
   font-size: 22px;
+  font-weight: 700;
 }
 .section-sub{
   margin: 0 0 14px;
@@ -269,7 +209,9 @@ h1,h2,h3,h4,h5,h6,.section-title{
   border-bottom: 1px solid var(--border);
   background: rgba(255,255,255,.03);
 }
-.card-body{ padding: 12px; }
+.card-body{
+  padding: 12px;
+}
 .card-title{
   margin: 0 0 6px;
   font-weight: 650;
@@ -307,7 +249,6 @@ h1,h2,h3,h4,h5,h6,.section-title{
   color: var(--text);
   border: 1px solid var(--border);
   outline: none;
-  font-family: var(--font-main);
 }
 .field textarea{ min-height: 120px; resize: vertical; }
 
@@ -318,39 +259,38 @@ h1,h2,h3,h4,h5,h6,.section-title{
   font-size: 14px;
 }
 
-/* ---- Responsive ---- */
 @media (max-width: 980px){
   .grid{ grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 640px){
-  body{ padding-top: 66px; }
-
+  /* header: компактнее */
   .topbar-inner{
     padding: 12px var(--pad);
     gap: 10px;
   }
+
   .brand b{ letter-spacing: .10em; }
   .brand small{ display:none; }
+
   .nav{ display:none; }
 
-  .topbar-inner > div[style]{ gap: 8px !important; }
+  /* кнопки в хедере: компактные */
+  .topbar-inner > div[style]{
+    gap: 8px !important;
+  }
   .btn{
     padding: 9px 10px;
     font-size: 13px;
     white-space: nowrap;
   }
 
+  /* hero */
   .hero{
-    padding: 96px 0 54px;
+    padding: 72px 0 42px;
   }
-  .hero p{
-    margin-top: 28px;
-    max-width: 62ch;
-    font-size: 16px;
-  }
-  .hero-actions{ margin-top: 18px; }
+  .hero p{ max-width: 62ch; }
 
+  /* фильтры тегов: горизонтальный скролл */
   .filters{
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -365,6 +305,79 @@ h1,h2,h3,h4,h5,h6,.section-title{
     font-size: 12px;
   }
 
+  /* grid */
   .grid{ grid-template-columns: 1fr; }
-  #services .grid{ grid-template-columns: 1fr !important; }
+
+  /* services always 1-col */
+  #services .grid{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+
+
+
+/* --- Typography (clean system) --- */
+:root{
+  --font-hero: 'Bellota', system-ui, sans-serif;
+  --font-main: 'Instrument Sans Condensed', system-ui, sans-serif;
+
+  --h1-size: 44px;
+  --h2-size: 32px;
+  --h3-size: 24px;
+
+  --lh-head: 1.3;
+  --lh-body: 1.8;
+
+  --body-size: 16px;
+  --body-lg-size: 18px;
+  --small-size: 14px;
+  --caption-size: 13px;
+
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
+
+  --text-main: #E8E6E3;
+  --text-secondary: #B7B4B0;
+  --text-muted: #8A8783;
+}
+
+/* Базовый текст */
+body{
+  font-family: var(--font-main);
+  font-size: var(--body-size);
+  line-height: var(--lh-body);
+  font-weight: var(--w-regular);
+  color: var(--text-main);
+}
+
+/* ВСЕ заголовки — Instrument Sans */
+h1,h2,h3,h4,h5,h6,.section-title{
+  font-family: var(--font-main);
+  line-height: var(--lh-head);
+  color: var(--text-main);
+}
+
+h1{ font-size: var(--h1-size); font-weight: var(--w-semibold); }
+h2{ font-size: var(--h2-size); font-weight: var(--w-medium); }
+h3{ font-size: var(--h3-size); font-weight: var(--w-medium); }
+
+/* Кнопки */
+.btn{
+  font-family: var(--font-main);
+  font-weight: var(--w-medium);
+}
+
+/* Вторичный текст */
+small,.meta,.section-sub{
+  color: var(--text-secondary);
+}
+
+/* --- Bellota только для hero --- */
+.hero-title{
+  font-family: var(--font-hero);
+  font-weight: var(--w-bold);
 }
