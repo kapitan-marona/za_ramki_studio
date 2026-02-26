@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ЗА РАМКИ — студия дизайна интерьера</title>
+
+  <!-- Изящная типографика -->
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    body{ font-family: 'Manrope', sans-serif; }
+    .h1, .section-title, .project-title{
+      font-family: 'Prata', serif;
+      font-weight: 400;
+      letter-spacing: .02em;
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <b>ЗА РАМКИ</b>
+      <small>studio</small>
+    </div>
+
+    <nav class="nav">
+      <a href="#portfolio">Портфолио</a>
+      <a href="#services">Услуги</a>
+      <a href="#stages">Этапы</a>
+      <a href="#partners">Партнёры</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+
+    <div style="display:flex; gap:10px;">
+      <a class="btn ghost" href="#contact">Консультация</a>
+      <a class="btn primary" href="#contact">Заказать проект</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-stage">
+      <div class="hero-lines"></div>
+
+      <div class="hero-copy">
+        <div class="kicker"><i></i><span>Студия дизайна интерьера</span></div>
+
+        <h1 class="h1">
+          За рамки стандартов<br>
+          к смелым решениям.
+        </h1>
+
+        <p>
+          Добро пожаловать в студию дизайна «ЗА РАМКИ». 
+          Архитектура, материалы и детали — без лишнего.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn ghost" href="#contact">Консультация</a>
+          <a class="btn primary" href="#contact">Заказать проект</a>
+        </div>
+
+        <div class="hero-meta">
+          <span>Специалисты</span>
+          <span>Тренды</span>
+          <span>Авторский надзор</span>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="hero-shot big"></div>
+        <div class="hero-shot small"></div>
+        <div class="hero-shot small"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- мягкий скол -->
+  <div class="hero-edge">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path class="fill" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78 L1440,120 L0,120 Z"></path>
+      <path class="stroke" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78"></path>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ПОРТФОЛИО -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Портфолио</h2>
+    <p class="section-sub">
+      Галерея проектов. Строгая архитектура формы и пространства.
+    </p>
+
+    <div class="filters" id="tagFilters"></div>
+    <div class="grid" id="projectsGrid"></div>
+
+    <div class="more-row">
+      <button class="btn" id="btnMore" type="button">Показать ещё</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- УСЛУГИ -->
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-title">Услуги</h2>
+    <div class="panel">Заглушка блока услуг</div>
+  </div>
+</section>
+
+
+<!-- КОНТАКТ -->
+<section class="section" id="contact">
+  <div class="container">
+    <h2 class="section-title">Связаться</h2>
+    <div class="panel">
+      Формы подключим на следующем шаге.
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    © <span id="y"></span> ЗА РАМКИ
+  </div>
+</footer>
+
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

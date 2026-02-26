@@ -8,51 +8,74 @@
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <b><a href="./">ЗА РАМКИ</a></b>
-        <small>portfolio</small>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <b><a href="./">ЗА РАМКИ</a></b>
+      <small>portfolio</small>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <a class="btn" href="./#forms">Консультация</a>
+      <a class="btn primary" href="./#forms">Заказать проект</a>
+    </div>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container">
+
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="meta" style="margin-bottom:10px;">
+        <span><a href="./#portfolio">← Назад к портфолио</a></span>
       </div>
 
-      <div style="display:flex; gap:10px;">
-        <a class="btn ghost" href="./#contact">Консультация</a>
-        <a class="btn primary" href="./#contact">Заказать проект</a>
+      <h1 class="section-title" id="ptitle" style="margin:0 0 8px; font-size:24px;">Проект</h1>
+      <div class="meta" id="pmeta"></div>
+
+      <div id="psummaryWrap" style="margin-top:12px;">
+        <div class="meta" style="margin-bottom:6px;"><span>Кратко</span></div>
+        <div id="psummary" style="color:var(--muted);"></div>
+      </div>
+
+      <div id="ptaskWrap" style="margin-top:14px;">
+        <div class="meta" style="margin-bottom:6px;"><span>Задача</span></div>
+        <div id="ptask" style="color:var(--muted);"></div>
+      </div>
+
+      <div id="psolutionWrap" style="margin-top:14px;">
+        <div class="meta" style="margin-bottom:6px;"><span>Решение</span></div>
+        <div id="psolution" style="color:var(--muted);"></div>
       </div>
     </div>
-  </header>
 
-  <main class="section">
-    <div class="container">
+    <section aria-label="Галерея">
+      <h2 class="section-title" style="font-size:18px;">Галерея</h2>
+      <p class="section-sub">Пока изображения могут быть пустыми — это нормально для этапа наполнения.</p>
 
-      <div class="project-hero">
-        <div class="breadcrumb"><a href="./#portfolio">← Назад к портфолио</a></div>
-        <h1 class="project-title" id="ptitle">Проект</h1>
-        <div class="meta" id="pmeta"></div>
-        <div class="brass-line"></div>
-        <p class="project-summary" id="psummary"></p>
+      <div class="panel" id="galleryEmpty" style="display:none; margin-bottom:12px;">
+        У этого проекта пока нет изображений. Добавь файлы и пропиши пути в <code>data/projects.json</code>.
       </div>
 
-      <div class="gallery" id="gallery"></div>
+      <div class="grid" id="gallery" style="grid-template-columns: repeat(2, 1fr);"></div>
+    </section>
 
-      <div class="section" style="padding: 54px 0 0;">
-        <div class="panel">
-          <h2 class="section-title" style="margin-top:0;">Заказать проект</h2>
-          <p class="section-sub">Форма будет подключена на следующем шаге. Пока — якорь и CTA.</p>
-          <a class="btn primary" href="./#contact" onclick="location.href='./#contact'; return false;">Оставить заявку</a>
-        </div>
+    <section class="section" aria-label="CTA" style="padding-bottom:0;">
+      <div class="panel">
+        <h2 class="section-title" style="font-size:18px;">Заказать проект</h2>
+        <p class="section-sub">Оставьте заявку — мы свяжемся и уточним бюджет, сроки и формат работы.</p>
+        <a class="btn primary" href="./#forms" onclick="location.href='./#forms'; return false;">Оставить заявку</a>
       </div>
+    </section>
 
-    </div>
-  </main>
+  </div>
+</main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="meta">
-        <span>© <span id="y"></span> ЗА РАМКИ</span>
-      </div>
-    </div>
-  </footer>
+<footer class="footer">
+  <div class="container">
+    © <span id="y"></span> ЗА РАМКИ
+  </div>
+</footer>
 
 <script>
 (() => {
@@ -66,9 +89,26 @@
     .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
     .replaceAll('"',"&quot;").replaceAll("'","&#039;");
 
+  function setText(idSel, val){
+    const el = $(idSel);
+    if (!el) return;
+    el.textContent = (val ?? "").toString();
+  }
+
+  function setVisible(sel, isVisible){
+    const el = $(sel);
+    if (!el) return;
+    el.style.display = isVisible ? "" : "none";
+  }
+
   function showNotFound(){
-    $("#ptitle").textContent = "Проект не найден";
-    $("#psummary").textContent = "Проверь ссылку или вернись в портфолио.";
+    document.title = "Проект не найден — ЗА РАМКИ";
+    setText("#ptitle", "Проект не найден");
+    $("#pmeta").innerHTML = "";
+    setVisible("#psummaryWrap", false);
+    setVisible("#ptaskWrap", false);
+    setVisible("#psolutionWrap", false);
+    setVisible("#galleryEmpty", true);
     $("#gallery").innerHTML = "";
   }
 
@@ -80,25 +120,38 @@
       if (!p) return showNotFound();
 
       document.title = (p.title ? p.title + " — " : "") + "ЗА РАМКИ";
-      $("#ptitle").textContent = p.title || "Проект";
-      $("#pmeta").innerHTML = `
-        <span>${esc(p.city || "")}</span>
-        <span>•</span>
-        <span>${esc(p.type || "")}</span>
-        ${p.areaM2 ? `<span>•</span><span>${esc(p.areaM2)} м²</span>` : ""}
-      `;
-      $("#psummary").textContent = p.summary || "";
 
-      const imgs = Array.isArray(p.images) ? p.images : [];
+      setText("#ptitle", p.title || "Проект");
+
+      const metaParts = [];
+      if (p.city) metaParts.push(esc(p.city));
+      if (p.type) metaParts.push(esc(p.type));
+      if (p.areaM2) metaParts.push(esc(p.areaM2) + " м²");
+      $("#pmeta").innerHTML = metaParts.map(x => `<span>${x}</span>`).join("<span>•</span>");
+
+      const summary = (p.summary || "").trim();
+      const task = (p.task || "").trim();
+      const solution = (p.solution || "").trim();
+
+      setVisible("#psummaryWrap", !!summary);
+      setVisible("#ptaskWrap", !!task);
+      setVisible("#psolutionWrap", !!solution);
+
+      setText("#psummary", summary);
+      setText("#ptask", task);
+      setText("#psolution", solution);
+
+      const imgs = Array.isArray(p.images) ? p.images.filter(Boolean) : [];
+      setVisible("#galleryEmpty", imgs.length === 0);
+
       $("#gallery").innerHTML = imgs.map(src => `
-        <div class="img">
-          <img src="${esc(src)}" alt="${esc(p.title || "Проект")}" loading="lazy" />
-        </div>
+        <a class="card" href="${esc(src)}" target="_blank" rel="noopener">
+          <div class="card-media" style="background-image:url('${esc(src)}'); background-size:cover; background-position:center;"></div>
+          <div class="card-body">
+            <div class="meta"><span>Открыть изображение</span></div>
+          </div>
+        </a>
       `).join("");
-
-      if (!imgs.length){
-        $("#gallery").innerHTML = `<div class="panel">У проекта пока нет изображений. Добавь файлы в assets/portfolio/${esc(p.slug)}/</div>`;
-      }
     })
     .catch(showNotFound);
 })();
