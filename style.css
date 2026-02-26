@@ -131,7 +131,7 @@ a{ color:inherit; text-decoration:none; }
   position:absolute; inset:0;
   background:
     linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55)),
-    url("assets/hero/marble.jpg");
+    url("assets/hero/marble.png");
   background-size: cover;
   background-position: center;
   filter: saturate(.98) contrast(1.03);
@@ -400,3 +400,4 @@ a{ color:inherit; text-decoration:none; }
   .glass-card{ padding: 22px 18px; }
   .hero-inner{ padding: 62px 0 100px; }
 }
+
