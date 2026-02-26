@@ -4,227 +4,143 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ЗА РАМКИ — студия дизайна интерьера</title>
+
+  <!-- Изящная типографика -->
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    body{ font-family: 'Manrope', sans-serif; }
+    .h1, .section-title, .project-title{
+      font-family: 'Prata', serif;
+      font-weight: 400;
+      letter-spacing: .02em;
+    }
+  </style>
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <b>ЗА РАМКИ</b>
-        <small>studio</small>
-      </div>
-
-      <nav class="nav">
-        <a href="#portfolio">Портфолио</a>
-        <a href="#services">Услуги</a>
-        <a href="#stages">Этапы</a>
-        <a href="#partners">Партнёры</a>
-        <a href="#contact">Связаться</a>
-      </nav>
-
-      <div style="display:flex; gap:10px;">
-        <a class="btn ghost" href="#contact">Консультация</a>
-        <a class="btn primary" href="#contact">Заказать проект</a>
-      </div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <b>ЗА РАМКИ</b>
+      <small>studio</small>
     </div>
-  </header>
 
-  <section class="hero" id="top">
-    <div class="container hero-inner">
-      <div class="glass-card">
+    <nav class="nav">
+      <a href="#portfolio">Портфолио</a>
+      <a href="#services">Услуги</a>
+      <a href="#stages">Этапы</a>
+      <a href="#partners">Партнёры</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+
+    <div style="display:flex; gap:10px;">
+      <a class="btn ghost" href="#contact">Консультация</a>
+      <a class="btn primary" href="#contact">Заказать проект</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-stage">
+      <div class="hero-lines"></div>
+
+      <div class="hero-copy">
         <div class="kicker"><i></i><span>Студия дизайна интерьера</span></div>
 
-        <h1 class="h1">За рамки стандартов<br/>к смелым решениям.</h1>
+        <h1 class="h1">
+          За рамки стандартов<br>
+          к смелым решениям.
+        </h1>
 
-        <p>Добро пожаловать в студию дизайна «ЗА РАМКИ», располагайтесь.</p>
+        <p>
+          Добро пожаловать в студию дизайна «ЗА РАМКИ». 
+          Архитектура, материалы и детали — без лишнего.
+        </p>
 
         <div class="hero-actions">
           <a class="btn ghost" href="#contact">Консультация</a>
           <a class="btn primary" href="#contact">Заказать проект</a>
         </div>
 
-        <div class="pills" aria-label="ценности">
-          <span class="pill"><strong>Специалисты</strong></span>
-          <span class="pill"><strong>Тренды</strong></span>
-          <span class="pill"><strong>Авторский надзор</strong></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- “тихий скол” + латунная кромка -->
-    <div class="hero-edge" aria-hidden="true">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path class="fill" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78 L1440,120 L0,120 Z"></path>
-        <path class="stroke" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78"></path>
-      </svg>
-    </div>
-  </section>
-
-  <section class="section" id="portfolio">
-    <div class="container">
-      <div class="portfolio-top">
-        <div>
-          <h2 class="section-title">Портфолио</h2>
-          <p class="section-sub">Галерея проектов с тегами — для быстрого поиска того, что откликается.</p>
+        <div class="hero-meta">
+          <span>Специалисты</span>
+          <span>Тренды</span>
+          <span>Авторский надзор</span>
         </div>
       </div>
 
-      <div class="filters" id="tagFilters"></div>
-
-      <div class="grid" id="projectsGrid"></div>
-
-      <div class="more-row">
-        <button class="btn" id="btnMore" type="button">Показать ещё</button>
+      <div class="hero-media">
+        <div class="hero-shot big"></div>
+        <div class="hero-shot small"></div>
+        <div class="hero-shot small"></div>
       </div>
-    </div>
-  </section>
 
-  <section class="section" id="services">
-    <div class="container split">
-      <div class="panel">
-        <h2 class="section-title">Услуги</h2>
-        <p class="section-sub">Здесь позже будут реальные пакеты услуг. Сейчас — заглушка, чтобы проверить архитектуру.</p>
-        <div class="meta">
-          <span>• Проект</span><span>• Визуализация</span><span>• Комплектация</span><span>• Авторский надзор</span>
-        </div>
-      </div>
-      <div class="panel">
-        <h2 class="section-title">Этапы работы</h2>
-        <p class="section-sub">Тут будет таймлайн. Сейчас — заглушка.</p>
-        <div class="meta">
-          <span>1) Бриф</span><span>2) Концепция</span><span>3) Проект</span><span>4) Реализация</span>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
 
-  <section class="section" id="partners">
-    <div class="container">
-      <h2 class="section-title">Партнёры</h2>
-      <p class="section-sub">Интерактивная “комната” с hover-подсказками добавим следующим шагом. Сейчас важно поднять портфолио и шаблон проекта.</p>
-      <div class="panel">Заглушка секции партнёров</div>
-    </div>
-  </section>
+  <!-- мягкий скол -->
+  <div class="hero-edge">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path class="fill" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78 L1440,120 L0,120 Z"></path>
+      <path class="stroke" d="M0,75 C180,105 320,55 520,78 C700,100 820,55 980,72 C1160,92 1270,60 1440,78"></path>
+    </svg>
+  </div>
+</section>
 
-  <section class="section" id="contact">
-    <div class="container">
-      <h2 class="section-title">Связаться</h2>
-      <p class="section-sub">Формы подключим через Netlify Forms позже. Сейчас — место под секцию и якоря CTA.</p>
-      <div class="panel">
-        <div class="meta">
-          <span>• Консультация</span><span>• Заказать проект</span><span>• Оставить отзыв</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="meta">
-        <span>© <span id="y"></span> ЗА РАМКИ</span>
-        <span>•</span>
-        <span>Interior design studio</span>
-      </div>
+<!-- ПОРТФОЛИО -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Портфолио</h2>
+    <p class="section-sub">
+      Галерея проектов. Строгая архитектура формы и пространства.
+    </p>
+
+    <div class="filters" id="tagFilters"></div>
+    <div class="grid" id="projectsGrid"></div>
+
+    <div class="more-row">
+      <button class="btn" id="btnMore" type="button">Показать ещё</button>
     </div>
-  </footer>
+  </div>
+</section>
+
+
+<!-- УСЛУГИ -->
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-title">Услуги</h2>
+    <div class="panel">Заглушка блока услуг</div>
+  </div>
+</section>
+
+
+<!-- КОНТАКТ -->
+<section class="section" id="contact">
+  <div class="container">
+    <h2 class="section-title">Связаться</h2>
+    <div class="panel">
+      Формы подключим на следующем шаге.
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    © <span id="y"></span> ЗА РАМКИ
+  </div>
+</footer>
+
 
 <script>
-(() => {
-  const $ = (s) => document.querySelector(s);
-  const grid = $("#projectsGrid");
-  const filters = $("#tagFilters");
-  const btnMore = $("#btnMore");
-
-  $("#y").textContent = new Date().getFullYear();
-
-  let all = [];
-  let activeTag = "";
-  let limit = 9;
-
-  const esc = (v) => (v ?? "").toString()
-    .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;").replaceAll("'","&#039;");
-
-  function uniqTags(items){
-    const set = new Set();
-    items.forEach(p => (p.tags || []).forEach(t => set.add(t)));
-    return Array.from(set).sort((a,b) => a.localeCompare(b, "ru"));
-  }
-
-  function renderTags(){
-    const tags = uniqTags(all);
-    const mk = (label, val) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "tag" + (activeTag === val ? " active" : "");
-      b.textContent = label;
-      b.onclick = () => {
-        activeTag = (activeTag === val) ? "" : val;
-        limit = 9;
-        renderTags();
-        renderGrid();
-      };
-      return b;
-    };
-
-    filters.innerHTML = "";
-    filters.appendChild(mk("Все", ""));
-    tags.forEach(t => filters.appendChild(mk(t, t)));
-  }
-
-  function card(p){
-    const href = `project.html?id=${encodeURIComponent(p.slug)}`;
-    const cover = p.cover || "";
-    const meta = `${p.city || ""} • ${p.type || ""}${p.areaM2 ? " • " + p.areaM2 + " м²" : ""}`;
-    const tags = (p.tags || []).slice(0, 4).map(t => `<span class="chip">${esc(t)}</span>`).join("");
-
-    // фон-картинка через inline style; если файла нет — останется красивый градиент
-    const bg = cover ? `background-image:
-      linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,0)),
-      radial-gradient(900px 500px at 40% 30%, rgba(200,170,110,.18), transparent 60%),
-      radial-gradient(900px 500px at 70% 70%, rgba(192,58,20,.10), transparent 60%),
-      url('${esc(cover)}');` : "";
-
-    return `
-      <a class="card card-link" href="${href}">
-        <div class="card-media" style="${bg}"></div>
-        <div class="card-body">
-          <div class="card-title">${esc(p.title || "Проект")}</div>
-          <div class="meta"><span>${esc(meta)}</span></div>
-          <div class="card-tags">${tags}</div>
-        </div>
-      </a>
-    `;
-  }
-
-  function renderGrid(){
-    let items = all.slice();
-    if (activeTag){
-      items = items.filter(p => (p.tags || []).includes(activeTag));
-    }
-    const visible = items.slice(0, limit);
-    grid.innerHTML = visible.map(card).join("");
-
-    btnMore.style.display = (items.length > limit) ? "inline-flex" : "none";
-  }
-
-  btnMore.onclick = () => {
-    limit += 9;
-    renderGrid();
-  };
-
-  fetch("./data/projects.json", { cache: "no-store" })
-    .then(r => r.json())
-    .then(data => {
-      all = Array.isArray(data) ? data : [];
-      renderTags();
-      renderGrid();
-    })
-    .catch(() => {
-      filters.innerHTML = `<span class="pill">Не удалось загрузить projects.json</span>`;
-    });
-})();
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
 
 </body>
