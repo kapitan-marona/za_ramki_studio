@@ -1,4 +1,4 @@
-/* ===========================
+﻿/* ===========================
    ZA RAMKI — style.css (refactor)
    One source of truth:
    - Main: Manrope
@@ -9,44 +9,88 @@
 
 /* ---- Fonts (ONLY актуальные) ---- */
 @font-face{
-  font-family:'Playfair Display SC';
-  src:url('./fonts/PlayfairDisplaySC-Regular.ttf') format('truetype');
+  font-family:'Sansation';
+  src:url('./fonts/Sansation.ttf') format('truetype');
   font-weight:400;
   font-style:normal;
-  font-display:swap;
-}
+  font-display:swap;}
 @font-face{
-  font-family:'Playfair Display SC';
-  src:url('./fonts/PlayfairDisplaySC-Italic.ttf') format('truetype');
+  font-family:'Sansation';
+  src:url('./fonts/Sansation.ttf') format('truetype');
   font-weight:400;
   font-style:italic;
-  font-display:swap;
-}
+  font-display:swap;}
 
 @font-face{
   font-family:'Manrope';
   src:url('./fonts/Manrope-Regular.ttf') format('truetype');
   font-weight:400;
   font-style:normal;
-  font-display:swap;
-}
+  font-display:swap;}
 @font-face{
   font-family:'Manrope';
   src:url('./fonts/Manrope-Medium.ttf') format('truetype');
   font-weight:500;
   font-style:normal;
-  font-display:swap;
-}
+  font-display:swap;}
 @font-face{
   font-family:'Manrope';
   src:url('./fonts/Manrope-SemiBold.ttf') format('truetype');
   font-weight:600;
   font-style:normal;
-  font-display:swap;
-}
+  font-display:swap;}
 
 /* ---- Tokens ---- */
 :root{
+
+  /* ---- HERO ALIGNMENT ---- */
+  --hero-align: right; /* left | center | right */
+
+  --hero-suptitle-size: 16px;
+  --hero-suptitle-letter: .22em;
+  --hero-suptitle-color: rgba(255,255,255,.70);
+  --hero-suptitle-gap: 18px;
+
+  /* =========================
+     HERO CONTROL PANEL
+     Все ключевые настройки hero — здесь.
+     Меняй значения ниже.
+     ========================= */
+
+  --hero-padding-top: 160px;
+  --hero-padding-bottom: 100px;
+
+  --hero-title-size: clamp(84px, 9vw, 132px);
+  --hero-title-line: 1.0;
+  --hero-title-letter: .02em;
+
+  --hero-sub-margin-top: 48px;
+  --hero-sub-size: 17px;
+  --hero-sub-width: 58ch;
+
+  --hero-cta-margin-top: -78px;
+
+  /* =========================
+     CONFIG: site knobs (крутилки)
+     Меняй это — и весь UI предсказуемо масштабируется/двигается.
+     ========================= */
+
+  /* Layout rails */
+  --max: 1240px;                 /* максимальная ширина контейнера */
+  --pad: 24px;                   /* боковой padding контейнера */
+
+  /* Header */
+  --header-pad-y: 16px;          /* вертикальный padding в хедере */
+  --header-gap: 22px;            /* расстояние между brand / nav / cta */
+  --nav-gap: clamp(22px, 3.2vw, 56px); /* расстояние между пунктами меню */
+  --cta-gap: 14px;               /* gap между CTA кнопками справа */
+
+  /* Typography (hero) — нарастим позже, но лучше держать здесь */
+  --rail: calc((100vw - var(--max)) / 2 + var(--pad));
+  --rail-min: 10px;
+  --rail-safe: max(var(--rail-min), var(--rail));
+  --nav-inset: clamp(180px, 10vw, 360px);
+
   --bg:#0f1013;
   --panel:#14151a;
   --text:rgba(255,255,255,.90);
@@ -54,12 +98,16 @@
   --border:rgba(255,255,255,.12);
   --accent:#B43202;
 
+  /* NOTE: ниже есть дубль --max/--pad.
+     Я его НЕ трогаю сейчас, чтобы не сломать геометрию.
+     Позже в рефакторинге приведём к одному источнику правды. */
   --max:1120px;
   --pad:20px;
+
   --gap:16px;
 
   --font-main:'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  --font-hero:'Playfair Display SC', serif;
+  --font-hero:'Sansation', serif;
 
   --w-regular:400;
   --w-medium:500;
@@ -85,8 +133,11 @@ body{
   padding-top:70px;
 }
 
+/* Links: no underline anywhere */
 a{ color:inherit; text-decoration:none; }
-a:hover{ text-decoration:underline; }
+a:hover{ text-decoration:none; }
+a:focus{ text-decoration:none; }
+a:focus-visible{ text-decoration:none; }
 
 .container{
   max-width:var(--max);
@@ -119,14 +170,19 @@ h1,h2,h3,h4,h5,h6,.section-title{
   border-bottom:1px solid rgba(255,255,255,.10);
 }
 
+/* =========================
+   ==== HEADER / NAV ====
+   ========================= */
+
 .topbar-inner{
   max-width:var(--max);
   margin:0 auto;
-  padding:16px var(--pad);
-  display:flex;
+  padding: var(--header-pad-y) var(--pad); /* header padding */
+
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
-  justify-content:space-between;
-  gap:22px;
+  gap: var(--header-gap); /* spacing between brand / nav / cta */
 }
 
 .brand{
@@ -150,6 +206,15 @@ h1,h2,h3,h4,h5,h6,.section-title{
   display:flex;
   align-items:center;
   justify-content:space-evenly;
+  gap: var(--nav-gap); /* menu item spacing */
+  padding: 0;
+  min-width:0;
+}
+
+.topbar-cta{
+  display:flex;
+  gap: var(--cta-gap); /* spacing between CTA buttons */
+  justify-content:flex-end;
 }
 
 /* Architectural nav links (calmer than CTA) */
@@ -174,14 +239,12 @@ h1,h2,h3,h4,h5,h6,.section-title{
   transition:
     transform .26s cubic-bezier(.22,.61,.36,1),
     opacity .26s ease,
-    filter .26s ease,
-    letter-spacing .26s ease;
+    filter .26s ease;
 }
 .nav a:hover{
   opacity:1;
-  transform:translate3d(3px,-1px,0);
+  transform:translate3d(2px,-1px,0); /* чуть мягче */
   filter:drop-shadow(0 8px 18px rgba(0,0,0,.38));
-  letter-spacing:.04em;
 }
 .nav a:focus-visible{
   outline:none;
@@ -198,29 +261,30 @@ h1,h2,h3,h4,h5,h6,.section-title{
 
   font-family:var(--font-main);
   font-weight:var(--w-medium);
-  letter-spacing:.03em;
+  letter-spacing:.03em; /* фиксируем — без “расширения” */
   text-transform:uppercase;
 
   color:var(--text);
   opacity:.86;
 
+  text-decoration:none;
+
   transform:translate3d(0,0,0);
   transition:
-    transform .26s cubic-bezier(.22,.61,.36,1),
-    opacity .26s ease,
-    filter .26s ease,
-    letter-spacing .26s ease;
+    transform .32s cubic-bezier(.22,.61,.36,1),
+    opacity .24s ease,
+    filter .32s ease;
 }
 .btn:hover{
   opacity:1;
-  transform:translate3d(6px,-1px,0);
-  filter:drop-shadow(0 12px 28px rgba(0,0,0,.45));
-  letter-spacing:.045em;
+  transform:translate3d(2px,0,0); /* было 6px,-1px — убегало */
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.38));
 }
 .btn:active{
-  transform:translate3d(4px,0,0);
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));
+  transform:translate3d(1px,0,0);
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.30));
 }
+
 .btn.primary{
   color:var(--accent);
   opacity:.92;
@@ -228,40 +292,56 @@ h1,h2,h3,h4,h5,h6,.section-title{
 .btn.primary:hover{
   opacity:1;
   filter:
-    drop-shadow(0 14px 30px rgba(0,0,0,.45))
-    drop-shadow(0 0 18px rgba(180,50,2,.22));
+    drop-shadow(0 12px 26px rgba(0,0,0,.40))
+    drop-shadow(0 0 14px rgba(180,50,2,.18));
 }
 
-/* ---- Hero ---- */
+/* =========================
+   ==== HERO SECTION ====
+   Управляется через HERO CONTROL PANEL
+   ========================= */
+
 .hero{
-  padding:140px 0 90px;
+  padding: var(--hero-padding-top) 0 var(--hero-padding-bottom);
 }
+
 .hero h1.hero-title{
-  font-family:var(--font-hero);
-  font-weight:400;
-  font-style:normal;
-  font-size:clamp(36px, 4.6vw, 64px);
-  line-height:1.03;
-  letter-spacing:.02em;
-  margin:0;
-  color:rgba(255,255,255,.86);
+  font-family: var(--font-hero);
+  font-size: var(--hero-title-size);
+  line-height: var(--hero-title-line);
+  letter-spacing: var(--hero-title-letter);
+  margin: 0;
+  color: rgba(255,255,255,.86);
+  text-align: var(--hero-align);
 }
+
 .hero h1.hero-title em{
-  font-style:italic;
-  color:rgba(255,255,255,.78);
+  font-style: italic;
+  color: rgba(255,255,255,.78);
 }
+
 .hero p{
-  margin:42px 0 0;
-  max-width:58ch;
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.8;
+  margin: var(--hero-sub-margin-top) 0 0;
+  max-width: var(--hero-sub-width);
+  font-size: var(--hero-sub-size);
+  color: var(--muted);
+  line-height: 1.8;
 }
+
 .hero-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:30px;
+  display: flex;
+  gap: var(--cta-gap);
+  flex-wrap: wrap;
+  margin-top: var(--hero-cta-margin-top);
+}
+
+.hero .hero-suptitle{
+  font-size: var(--hero-suptitle-size);
+  letter-spacing: var(--hero-suptitle-letter);
+  text-transform: uppercase;
+  color: var(--hero-suptitle-color);
+  margin: 0 0 var(--hero-suptitle-gap) 0;
+  text-align: var(--hero-align);
 }
 
 /* ---- Sections ---- */
@@ -306,11 +386,24 @@ h1,h2,h3,h4,h5,h6,.section-title{
   gap:var(--gap);
 }
 
+/* Portfolio / gallery cards */
 .card{
   border:1px solid var(--border);
   background:var(--panel);
   display:block;
+
+  transition:
+    transform .28s cubic-bezier(.22,.61,.36,1),
+    box-shadow .28s cubic-bezier(.22,.61,.36,1),
+    border-color .28s ease;
+  will-change: transform;
 }
+.card:hover{
+  transform:translate3d(0,-2px,0);
+  box-shadow:0 18px 36px rgba(0,0,0,.28);
+  border-color:rgba(255,255,255,.16);
+}
+
 .card-media{
   aspect-ratio:4 / 3;
   border-bottom:1px solid var(--border);
@@ -365,8 +458,50 @@ h1,h2,h3,h4,h5,h6,.section-title{
   font-size:14px;
 }
 
+/* =========================
+   Project page: "Back to portfolio" micro-effect
+   Works even without HTML changes (matches href containing #portfolio)
+   If you later add class="back-link" — it will also match.
+   ========================= */
+
+.back-link,
+.meta a[href*="#portfolio"]{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:transform .30s cubic-bezier(.22,.61,.36,1),
+             opacity .24s ease;
+  opacity:.90;
+}
+
+.back-link::before,
+.meta a[href*="#portfolio"]::before{
+  content:"←";
+  display:inline-block;
+  transform:scaleX(1);
+  transform-origin:left center;
+  transition:transform .30s cubic-bezier(.22,.61,.36,1);
+}
+
+.back-link:hover,
+.meta a[href*="#portfolio"]:hover{
+  transform:translateX(-2px);
+  opacity:1;
+}
+
+.back-link:hover::before,
+.meta a[href*="#portfolio"]:hover::before{
+  transform:scaleX(1.6); /* elongate arrow */
+}
+
 /* ---- Responsive ---- */
 @media (max-width:980px){
+  /* stabilize header in “mid” widths so nav doesn't bunch */
+  .topbar-inner{ grid-template-columns:auto minmax(0,1fr) auto; }
+  .nav{ justify-content:center; flex-wrap:nowrap; }
+  .nav a{ white-space:nowrap; }
+
   .grid{ grid-template-columns:repeat(2, 1fr); }
 }
 
@@ -374,16 +509,34 @@ h1,h2,h3,h4,h5,h6,.section-title{
   body{ padding-top:66px; }
 
   .topbar-inner{
-    padding:12px var(--pad);
-    gap:10px;
+    max-width:var(--max);
+    margin:0 auto;
+    padding: var(--header-pad-y) var(--pad);
+
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap: var(--header-gap);
   }
 
   .brand b{ letter-spacing:.10em; }
   .brand small{ display:none; }
-  .nav{ display:none; }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: var(--nav-gap);
+    min-width:0;
+  }
+
+  .topbar-cta{
+    display:flex;
+    gap: var(--cta-gap);
+    justify-content:flex-end;
+  }
 
   /* header buttons compact */
-  .topbar-inner > div[style]{ gap:8px !important; }
   .btn{
     padding:9px 10px;
     font-size:13px;
@@ -416,11 +569,4 @@ h1,h2,h3,h4,h5,h6,.section-title{
   #services .grid{ grid-template-columns:1fr !important; }
 }
 
-/* --- Remove underline from buttons only --- */
-.btn,
-.btn:hover,
-.hero-actions a,
-.hero-actions a:hover{
-  text-decoration: none !important;
-}
-
+/* BRANCH_TEST: f54cbd8 */
