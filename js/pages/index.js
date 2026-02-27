@@ -17,21 +17,35 @@ export async function initIndex(){
   if (!grid || !filters || !btnMore) return;
 
   let all = [];
-  let activeTag = "";
+  const activeTags = new Set();  // multi-select
   let limit = 9;
+
+  function isActive(val){
+    return activeTags.has(val);
+  }
 
   function renderTags(){
     const tags = uniqTags(all);
     filters.innerHTML = "";
 
-    const mk = (label, val) => {
+    const mk = (label, val, kind = "tag") => {
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "tag" + (activeTag === val ? " active" : "");
+      b.className = kind + (val && isActive(val) ? " active" : "");
       b.textContent = label;
-      b.setAttribute("aria-pressed", activeTag === val ? "true" : "false");
+
+      const pressed = val ? (isActive(val) ? "true" : "false") : (activeTags.size === 0 ? "true" : "false");
+      b.setAttribute("aria-pressed", pressed);
+
       b.onclick = () => {
-        activeTag = (activeTag === val) ? "" : val;
+        if (!val){
+          // "Все" = сброс
+          activeTags.clear();
+        } else {
+          // toggle
+          if (activeTags.has(val)) activeTags.delete(val);
+          else activeTags.add(val);
+        }
         limit = 9;
         renderTags();
         renderGrid();
@@ -39,8 +53,20 @@ export async function initIndex(){
       return b;
     };
 
+    // "Все" всегда первым
     filters.appendChild(mk("Все", ""));
+
     tags.forEach(t => filters.appendChild(mk(t, t)));
+  }
+
+  function passesFilter(p){
+    if (activeTags.size === 0) return true;
+
+    // AND logic: project must contain ALL selected tags
+    for (const t of activeTags){
+      if (!(p.tags || []).includes(t)) return false;
+    }
+    return true;
   }
 
   function card(p){
@@ -63,10 +89,7 @@ export async function initIndex(){
   }
 
   function renderGrid(){
-    let items = all.slice();
-    if (activeTag){
-      items = items.filter(p => (p.tags || []).includes(activeTag));
-    }
+    let items = all.filter(passesFilter);
     const visible = items.slice(0, limit);
     grid.innerHTML = visible.map(card).join("");
     btnMore.style.display = (items.length > limit) ? "inline-flex" : "none";
