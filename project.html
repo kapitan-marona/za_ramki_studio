@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Проект — ЗА РАМКИ</title>
   <link rel="stylesheet" href="./style.css" />
+  <meta name="description" content="Проект студии дизайна интерьера «ЗА РАМКИ».">
+  <meta property="og:title" content="Проект — ЗА РАМКИ">
+  <meta property="og:description" content="Страница проекта в портфолио студии «ЗА РАМКИ».">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
 </head>
-<body>
+<body data-page="project">
 
 <header class="topbar">
   <div class="topbar-inner">
@@ -27,7 +32,7 @@
 
     <div class="panel" style="margin-bottom:16px;">
       <div class="meta" style="margin-bottom:10px;">
-        <span><a href="./#portfolio">← Назад к портфолио</a></span>
+        <span><a class="back-link" href="./#portfolio">Назад к портфолио</a></span>
       </div>
 
       <h1 class="section-title" id="ptitle" style="margin:0 0 8px; font-size:24px;">Проект</h1>
@@ -77,85 +82,7 @@
   </div>
 </footer>
 
-<script>
-(() => {
-  const $ = (s) => document.querySelector(s);
-  $("#y").textContent = new Date().getFullYear();
-
-  const params = new URLSearchParams(location.search);
-  const id = (params.get("id") || "").trim();
-
-  const esc = (v) => (v ?? "").toString()
-    .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;").replaceAll("'","&#039;");
-
-  function setText(idSel, val){
-    const el = $(idSel);
-    if (!el) return;
-    el.textContent = (val ?? "").toString();
-  }
-
-  function setVisible(sel, isVisible){
-    const el = $(sel);
-    if (!el) return;
-    el.style.display = isVisible ? "" : "none";
-  }
-
-  function showNotFound(){
-    document.title = "Проект не найден — ЗА РАМКИ";
-    setText("#ptitle", "Проект не найден");
-    $("#pmeta").innerHTML = "";
-    setVisible("#psummaryWrap", false);
-    setVisible("#ptaskWrap", false);
-    setVisible("#psolutionWrap", false);
-    setVisible("#galleryEmpty", true);
-    $("#gallery").innerHTML = "";
-  }
-
-  fetch("./data/projects.json", { cache: "no-store" })
-    .then(r => r.json())
-    .then(list => {
-      const items = Array.isArray(list) ? list : [];
-      const p = items.find(x => (x.slug || "") === id);
-      if (!p) return showNotFound();
-
-      document.title = (p.title ? p.title + " — " : "") + "ЗА РАМКИ";
-
-      setText("#ptitle", p.title || "Проект");
-
-      const metaParts = [];
-      if (p.city) metaParts.push(esc(p.city));
-      if (p.type) metaParts.push(esc(p.type));
-      if (p.areaM2) metaParts.push(esc(p.areaM2) + " м²");
-      $("#pmeta").innerHTML = metaParts.map(x => `<span>${x}</span>`).join("<span>•</span>");
-
-      const summary = (p.summary || "").trim();
-      const task = (p.task || "").trim();
-      const solution = (p.solution || "").trim();
-
-      setVisible("#psummaryWrap", !!summary);
-      setVisible("#ptaskWrap", !!task);
-      setVisible("#psolutionWrap", !!solution);
-
-      setText("#psummary", summary);
-      setText("#ptask", task);
-      setText("#psolution", solution);
-
-      const imgs = Array.isArray(p.images) ? p.images.filter(Boolean) : [];
-      setVisible("#galleryEmpty", imgs.length === 0);
-
-      $("#gallery").innerHTML = imgs.map(src => `
-        <a class="card" href="${esc(src)}" target="_blank" rel="noopener">
-          <div class="card-media" style="background-image:url('${esc(src)}'); background-size:cover; background-position:center;"></div>
-          <div class="card-body">
-            <div class="meta"><span>Открыть изображение</span></div>
-          </div>
-        </a>
-      `).join("");
-    })
-    .catch(showNotFound);
-})();
-</script>
+<script type="module" src="./js/app.js"></script>
 
 </body>
 </html>
